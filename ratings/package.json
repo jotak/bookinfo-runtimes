@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "start": "node ratings.js"
+  },
+  "dependencies": {
+    "httpdispatcher": "1.0.0",
+    "mongodb": "^2.2.31",
+    "mysql": "^2.15.0",
+    "prom-client": "^11.2.1"
+  }
+}

@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: details
+    version: v1
+  name: details-v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: details
+      version: v1
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        kiali.io/runtimes: springboot
+      labels:
+        app: details
+        version: v1
+    spec:
+      containers:
+      - image: jotak/bookinfo-runtimes-details:latest
+        imagePullPolicy: IfNotPresent
+        name: details
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        securityContext:
+          privileged: false

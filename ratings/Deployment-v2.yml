@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: ratings
+    version: v2
+  name: ratings-v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ratings
+      version: v2
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        kiali.io/runtimes: nodejs
+      labels:
+        app: ratings
+        version: v2
+    spec:
+      containers:
+      - image: jotak/bookinfo-runtimes-ratings-v2:latest
+        imagePullPolicy: IfNotPresent
+        name: ratings-v2
+        ports:
+        - containerPort: 9080
+          name: http
+          protocol: TCP
+        securityContext:
+          privileged: false

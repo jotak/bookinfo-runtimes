@@ -1,0 +1,97 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Bookstore App</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">BookInfo Sample</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="text-center text-primary">{{ product.title }}</h3>
+      {% autoescape false %}
+      <p>Summary: {{ product.descriptionHtml }}</p>
+      {% endautoescape %}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      {% if detailsStatus == 200: %}
+      <h4 class="text-center text-primary">Book Details</h4>
+      <dl>
+        <dt>Type:</dt>{{ details.type }}
+        <dt>Pages:</dt>{{ details.pages }}
+        <dt>Publisher:</dt>{{ details.publisher }}
+        <dt>Language:</dt>{{ details.language }}
+        <dt>ISBN-10:</dt>{{ details['ISBN-10'] }}
+        <dt>ISBN-13:</dt>{{ details['ISBN-13'] }}
+      </dl>
+      {% else %}
+      <h4 class="text-center text-primary">Error fetching product details!</h4>
+      {% if details: %}
+      <p>{{ details.error }}</p>
+      {% endif %}
+      {% endif %}
+    </div>
+
+    <div class="col-md-6">
+      {% if reviewsStatus == 200: %}
+      <h4 class="text-center text-primary">Book Reviews</h4>
+      {% for review in reviews.reviews %}
+      <blockquote>
+        <p>{{ review.text }}</p>
+        <small>{{ review.reviewer }}</small>
+        {% if review.rating: %}
+        {% if review.rating.stars: %}
+        <font color="{{ review.rating.color }}">
+          <!-- full stars: -->
+          {% for n in range(review.rating.stars)  %}
+          <span class="glyphicon glyphicon-star"></span>
+          {% endfor %}
+          <!-- empty stars: -->
+          {% for n in range(5 - review.rating.stars) %}
+          <span class="glyphicon glyphicon-star-empty"></span>
+          {% endfor %}
+        </font>
+        {% elif review.rating.error: %}
+        <p><i>{{ review.rating.error }}</i></p>
+        {% endif %}
+        {% endif %}
+      </blockquote>
+      {% endfor %}
+      {% else %}
+      <h4 class="text-center text-primary">Error fetching product reviews!</h4>
+      {% if reviews: %}
+      <p>{{ reviews.error }}</p>
+      {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>

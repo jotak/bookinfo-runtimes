@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: reviews
+    version: v1
+  name: reviews-v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reviews
+      version: v1
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        kiali.io/runtimes: vertx-server,vertx-client
+      labels:
+        app: reviews
+        version: v1
+    spec:
+      containers:
+      - image: jotak/bookinfo-runtimes-reviews:latest
+        imagePullPolicy: IfNotPresent
+        name: reviews
+        ports:
+        - containerPort: 9080
+          name: http
+          protocol: TCP
+        securityContext:
+          privileged: false
