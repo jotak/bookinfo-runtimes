@@ -1,5 +1,14 @@
-== bookinfo-runtimes
+== bookinfo-runtimes (WIP)
 A rewrite of Istio's bookinfo with runtimes monitored by Kiali
+
+=== Description
+
+Each service uses a runtime for which Kiali has built-in dashboards:
+
+* Productpage: Thorntail
+* Reviews: Vert.x
+* Details: SpringBoot
+* Ratings: Node.js
 
 === Build
 
