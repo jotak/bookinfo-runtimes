@@ -20,8 +20,8 @@ items:
       metadata:
         annotations:
           prometheus.io/scrape: "true"
-          # prometheus.io/port: "8080"
-          # prometheus.io/scheme: "http"
+          prometheus.io/port: "8080"
+          prometheus.io/scheme: "http"
           kiali.io/runtimes: "thorntail"
         labels:
           app: productpage

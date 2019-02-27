@@ -1,6 +1,7 @@
 #!/bin/bash
 
 oc new-project bookinfo-runtimes
+oc project bookinfo-runtimes
 oc adm policy add-scc-to-user privileged -z default
 
 pushd productpage

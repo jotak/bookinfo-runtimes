@@ -15,6 +15,8 @@ spec:
     metadata:
       annotations:
         prometheus.io/scrape: "true"
+        prometheus.io/port: "9080"
+        prometheus.io/scheme: "http"
         kiali.io/runtimes: nodejs
       labels:
         app: ratings

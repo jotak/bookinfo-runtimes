@@ -68,46 +68,46 @@
         <groupId>io.thorntail</groupId>
         <artifactId>thorntail-maven-plugin</artifactId>
       </plugin>
+      <plugin>
+        <groupId>io.fabric8</groupId>
+        <artifactId>fabric8-maven-plugin</artifactId>
+        <version>3.5.41</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>io.fabric8</groupId>
+        <artifactId>fabric8-maven-plugin</artifactId>
+        <version>3.5.41</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <mode>kubernetes</mode>
+          <generator>
+            <config>
+              <thorntail-v2>
+                <name>jotak/bookinfo-runtimes-productpage:latest</name>
+              </thorntail-v2>
+            </config>
+            <includes>
+              <include>thorntail-v2</include>
+            </includes>
+            <excludes>
+              <exclude>webapp</exclude>
+            </excludes>
+          </generator>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
-
-  <profiles>
-    <profile>
-      <id>openshift</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>io.fabric8</groupId>
-            <artifactId>fabric8-maven-plugin</artifactId>
-            <version>3.5.41</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>resource</goal>
-                  <goal>build</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <generator>
-                <includes>
-                  <include>thorntail-v2</include>
-                </includes>
-                <excludes>
-                  <exclude>webapp</exclude>
-                </excludes>
-              </generator>
-              <enricher>
-                <config>
-                  <thorntail-v2-health-check>
-                    <path>/health</path>
-                  </thorntail-v2-health-check>
-                </config>
-              </enricher>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>

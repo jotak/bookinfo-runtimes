@@ -15,6 +15,9 @@ spec:
     metadata:
       annotations:
         prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/scheme: "http"
+        prometheus.io/path: "/actuator/prometheus"
         kiali.io/runtimes: springboot
       labels:
         app: details

@@ -1,11 +1,7 @@
 #!/bin/bash
 
-oc new-project bookinfo-runtimes
-oc adm policy add-scc-to-user privileged -z default
-
 pushd productpage
-    mvn clean package
-    mvn fabric8:build -Popenshift
+    mvn clean package fabric8:build
 popd
 
 pushd reviews
@@ -20,5 +16,5 @@ pushd ratings
 popd
 
 pushd details
-    mvn clean install dockerfile:build
+    mvn clean package dockerfile:build
 popd
