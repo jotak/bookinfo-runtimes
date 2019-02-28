@@ -23,7 +23,7 @@ public class ProductPage {
     private static final String SERVICES_DOMAIN = System.getenv("SERVICES_DOMAIN") == null ? "" : ("." + System.getenv("SERVICES_DOMAIN"));
 
     @GET
-    @Path("/api/v1/products")
+    @Path("/products")
     @Produces("application/json")
     public Response productsRoute() throws Exception {
         return Response.ok()
@@ -32,7 +32,7 @@ public class ProductPage {
     }
 
     @GET
-    @Path("/api/v1/products/{productId}")
+    @Path("/products/{productId}")
     @Produces("application/json")
     public Response productsRoute(@PathParam("productId") String productId) throws Exception {
         Client client = ClientBuilder.newBuilder().build();
@@ -50,7 +50,7 @@ public class ProductPage {
     }
 
     @GET
-    @Path("/api/v1/products/{productId}/reviews")
+    @Path("/products/{productId}/reviews")
     @Produces("application/json")
     public Response reviewsRoute(@PathParam("productId") String productId) throws Exception {
         Client client = ClientBuilder.newBuilder().build();
@@ -68,7 +68,7 @@ public class ProductPage {
     }
 
     @GET
-    @Path("/api/v1/products/{productId}/ratings")
+    @Path("/products/{productId}/ratings")
     @Produces("application/json")
     public Response ratingsRoute(@PathParam("productId") String productId) throws Exception {
         Client client = ClientBuilder.newBuilder().build();
@@ -99,7 +99,7 @@ public class ProductPage {
         return Optional.of(products.get(id));
     }
 
-    private static class Product {
+    static class Product {
         int id;
         String title;
         String descriptionHtml;
@@ -109,13 +109,29 @@ public class ProductPage {
             this.title = title;
             this.descriptionHtml = descriptionHtml;
         }
+
+        public int getId() {
+            return id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getDescriptionHtml() {
+            return descriptionHtml;
+        }
     }
 
-    private static class Error {
+    static class Error {
         String error;
 
         Error(String error) {
             this.error = error;
+        }
+
+        public String getError() {
+            return this.error;
         }
     }
 }
