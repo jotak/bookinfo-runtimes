@@ -2,6 +2,7 @@
 
 pushd productpage
     mvn clean package fabric8:build
+#    docker build -t jotak/bookinfo-runtimes-productpage:latest .
 popd
 
 pushd reviews

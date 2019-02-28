@@ -5,7 +5,13 @@ oc project bookinfo-runtimes
 oc adm policy add-scc-to-user privileged -z default
 
 pushd productpage
-    oc apply -f <(istioctl kube-inject -f application.yml)
+    if [[ "$1" = "--s2i" ]]; then
+        oc apply -f <(istioctl kube-inject -f DeploymentConfig.yml)
+    else
+        oc apply -f <(istioctl kube-inject -f Deployment.yml)
+    fi
+    oc apply -f Service.yml
+    oc apply -f Gateway-VS.yml
     oc expose svc/productpage
 popd
 

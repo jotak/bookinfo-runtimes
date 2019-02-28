@@ -16,13 +16,24 @@ Each service uses a runtime for which Kiali has built-in dashboards:
 ./build-all.sh
 ```
 
+Note: build requires a connection to the OpenShift cluster as the thorntail example uses S2I (I gave up on trying to build the image without S2I ... for some obscure reason the productpage app fails to start then).
+
 === Deploy
+
+To deploy without prior build (docker images pulled from registry):
 
 ```
 ./deploy-all.sh
 ```
 
+To deploy after prior build, using s2i image stream for Thorntail (productpage):
 
+```
+./deploy-all.sh --s2i
+```
+
+
+=== Prometheus setup before istio 1.1.rc0
 
 To allow prometheus scrape on http (non secure) :
 

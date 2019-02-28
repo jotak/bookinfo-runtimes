@@ -10,6 +10,9 @@
 
   <properties>
     <version.thorntail>2.3.0.Final</version.thorntail>
+    <!-- <fabric8.build.strategy>docker</fabric8.build.strategy> -->
+    <!-- <fabric8.build.recreate>all</fabric8.build.recreate> -->
+    <!-- <fabric8.generator.name>jotak/bookinfo-runtimes-productpage:latest</fabric8.generator.name> -->
   </properties>
 
   <dependencies>
@@ -75,30 +78,18 @@
         <executions>
           <execution>
             <goals>
-              <goal>build</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>io.fabric8</groupId>
-        <artifactId>fabric8-maven-plugin</artifactId>
-        <version>3.5.41</version>
-        <executions>
-          <execution>
-            <goals>
+              <!-- <goal>resource</goal> -->
               <goal>build</goal>
             </goals>
           </execution>
         </executions>
         <configuration>
-          <mode>kubernetes</mode>
           <generator>
-            <config>
+            <!-- <config>
               <thorntail-v2>
                 <name>jotak/bookinfo-runtimes-productpage:latest</name>
               </thorntail-v2>
-            </config>
+            </config> -->
             <includes>
               <include>thorntail-v2</include>
             </includes>
