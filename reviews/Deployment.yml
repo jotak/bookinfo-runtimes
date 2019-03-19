@@ -17,7 +17,7 @@ spec:
         prometheus.io/scrape: "true"
         prometheus.io/port: "9080"
         prometheus.io/scheme: "http"
-        kiali.io/runtimes: vertx-server,vertx-client
+        kiali.io/runtimes: vertx-server,vertx-client,vertx-jvm
       labels:
         app: reviews
         version: v1
